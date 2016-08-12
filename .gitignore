@@ -45,3 +45,10 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.prj
+ASCII_TminMonths/tmin8.asc.xml
+*.asc
+ASCII_PrecMonths/prec_5.asc.xml
+*.Rhistory
+ASCII_PrecMonths/prec_1.asc.xml
+*.xml

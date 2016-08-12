@@ -14,27 +14,41 @@ library(raster)
 
 ### Get desired rasters for May-Oct
 
-## Tempmax
-for(i in 5:10) { 
-  namvar<-paste0(i, "Tmax")
-  assign(namvar, raster(paste0("ASCII_TmaxMonths/tmax", i, ".asc")))
-  }
+## Temp
+#max
+setwd("ASCII_TmaxMonths/")
+Tmax<- list.files(pattern="tmax[56789].asc$|[0]+.asc$") 
+Tmax<-stack(Tmax)
 
-## Tempmin
-for(i in 5:10) { 
-  namvar<-paste0(i, "Tmin")
-  assign(namvar, raster(paste0("ASCII_TminMonths/tmin", i, ".asc")))
-}
+#min              
+setwd("../ASCII_TminMonths/")                  
+Tmin<- list.files(pattern="tmin[56789].asc$|[0]+.asc$") 
+Tmin<-stack(Tmin)
+
+#stack
+TempS<-stack(Tmin, Tmax)
+rm(Tmin,Tmax)
+
+## Rain
+setwd("../ASCII_PrecMonths/")
+PrecS<- list.files(pattern="prec_[56789].asc$|[0]+.asc$") 
+PrecS<-stack(PrecS)
+
+### Obtain means and generate rasters
+
+# Temp
+Tmean<-mean(TempS)
+writeRaster(Tmean, "../Tmean_MayOct.asc")
+
+# Rain 
+Pmean<-mean(PrecS)
+writeRaster(Pmean,"../Precipmean_MayOct.asc")
 
 
-## Rainfall
-for(i in 5:10) { 
-  namvar<-paste0(i, "Prec")
-  assign(namvar, raster(paste0("ASCII_PrecMonths/prec_", i, ".asc")))
-}
-
-
-## Obtain mean
+### Plots
+library(RColorBrewer)
+plot(Tmean, col=rev(brewer.pal(11, "RdYlBu")), main="Mean Temperature May-Oct (°C)")
+plot(Pmean, col=brewer.pal(11, "YlGn"), main="Mean rainfall May-Oct (mm)")
 
 
 

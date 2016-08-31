@@ -52,3 +52,12 @@ ASCII_PrecMonths/prec_5.asc.xml
 *.Rhistory
 ASCII_PrecMonths/prec_1.asc.xml
 *.xml
+*.dbf
+conto4mgw/conto4mgw.shp
+*.shx
+MeanPrecip_maizeMX.png
+*.png
+MuncipiosMaiz_sueloagricola/Rend_Maiz_Mun_2010_USV_s5_Tem_Sel.sbn
+*.sbx
+MuncipiosMaiz_sueloagricola/Rend_Maiz_Mun_2010_USV_s5_Tem_Sel.shp
+*.html

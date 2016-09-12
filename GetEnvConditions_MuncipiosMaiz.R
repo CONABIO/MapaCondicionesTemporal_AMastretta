@@ -16,9 +16,11 @@ Envdata<-stack(c("Precipmean_MayOct.asc", "Tmean_MayOct.asc") )
 # Change projection
 proj4string(TmpPrec) <- CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0")
 
-# Read shapefile with municipios cropped to agriculture area
+# Shapefile with municipios cropped to agriculture area
 MuniMaizAgro<-readShapePoly("MuncipiosMaiz_sueloagricola/Rend_Maiz_Mun_2010_USV_s5_Tem_Sel")
 
+# Mexico
+Mx<-readShapePoly("conto4mgw/conto4mgw")
 
 ## Easy plot 
 plot(Envdata[[1]])
@@ -46,16 +48,12 @@ head(munivals)
 MuniMaizAgro$Precipmean_MayOct<-munivals[,1]
 MuniMaizAgro$Tmean_MayOct<-munivals[,2]
 
-## Plot
-spplot(MuniMaizAgro, "Precipmean_MayOct", col="transparent", 
-       col.regions = brewer.pal(9, "YlGnBu"), cuts=9)
+proj4string(MuniMaizAgro) <- CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0")
+
+writePolyShape(MuniMaizAgro,"MuncipiosMaiz_sueloagricola_TempPrecip/Rend_Maiz_Mun_2010_USV_s5_Tem_Sel_plusTempPrecip.shp")
 
 
-
-
-
-
-
+summary(MuniMaizAgro$Precipmean_MayOct)
 
 
 
